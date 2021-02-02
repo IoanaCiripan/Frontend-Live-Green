@@ -1,0 +1,60 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="searchForm">
+      <div class="input-group no-border">
+        <input
+          type="text"
+          formControlName="search"
+          value=""
+          class="form-control"
+          placeholder="Search..."
+        />
+        <button
+          mat-raised-button
+          type="submit"
+          class="btn btn-white btn-round btn-just-icon"
+          (click)="onSearch()"
+        >
+          <i class="material-icons">search</i>
+          <div class="ripple-container"></div>
+        </button>
+      </div>
+    </form>
+    <div class="row">
+      <div class="article-card col-md-6" *ngFor="let offer of offers.offers">
+        <div class="card card-chart">
+          <div class="card-header">
+            <div>
+              <img
+                [src]="offer.image"
+                (error)="setDefaultPic(offer)"
+              />
+            </div>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{ offer.name }}</h4>
+            <p class="card-category">{{ offer.description }}</p>
+          </div>
+          <div class="card-footer">
+            <p>City: {{ offer.city }}</p>
+            <p>Points: {{ offer.points }}</p>
+            <p>Expiration Date: {{ offer.expirationDate | date }}</p>
+          </div>
+          <div
+            fxLayoutAlign="start center"
+            fxLayoutAlign.lt-md="center center"
+            class="card-footer"
+          >
+            <button
+              class="btn btn-danger btn-round"
+              type="button"
+              (click)="applyForOffer(offer)"
+            >
+              Aplica pentru aceasta oferta
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

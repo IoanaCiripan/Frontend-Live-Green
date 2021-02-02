@@ -1,0 +1,77 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Punctele tale</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{user?.totalPoints}}</p>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Oferte</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="article-card"  *ngFor="let offer of offers.offers | slice:0:3; let i=index">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <div>
+                                        <img [src]="offer.image" (error)="setOfferDefaultPic(offer)">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{offer.name}}</h4>
+                                    <p class="card-category">{{offer.description}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <p>City: {{offer.city}}</p>
+                                    <p>Points: {{offer.points}}</p>
+                                    <p>Expiration Date: {{offer.expirationDate | date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayoutAlign="center center" style="margin-bottom: 20px;">
+                        <button class="btn btn-danger btn-round" type="button" [routerLink]="['/offers']">Mai multe oferte</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Produse reciclabile</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="article-card"  *ngFor="let product of products.products| slice:0:3; let i=index">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <div>
+                                        <img [src]="product.image" (error)="setProductDefaultPic(product)">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{product.name}}</h4>
+                                </div>
+                                <div class="card-footer">
+                                    <p>Points: {{product.points}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayoutAlign="center center" style="margin-bottom: 20px;">
+                        <button class="btn btn-danger btn-round" type="button" [routerLink]="['/products']">Mai multe produse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

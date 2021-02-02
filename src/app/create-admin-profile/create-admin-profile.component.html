@@ -1,0 +1,141 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Creaza profilul</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createUserForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="firstName"
+                      placeholder="Prenume"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="lastName"
+                      placeholder="Nume"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="email"
+                      placeholder="Adresa de email"
+                      type="email"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="zipCode"
+                      placeholder="Cod zip"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="password"
+                      placeholder="Parola"
+                      type="password"
+                      required
+                    />
+                    <mat-error *ngIf="password.hasError('required')">
+                      <mat-icon>clear</mat-icon>
+                      Password is required!
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('minlength')">
+                      <mat-icon>clear</mat-icon>
+                      Password must have at least 6 characters!
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('hasNumber')">
+                      <mat-icon>clear</mat-icon>
+                      Password needs to have at least one number!
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('hasCapitalCase')">
+                      <mat-icon>clear</mat-icon>
+                      Password needs to have at least one uppercase letter!
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('hasSmallCase')">
+                      <mat-icon>clear</mat-icon>
+                      Password needs to have at least one lowercase letter!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="confirmPassword"
+                      placeholder="Confirma parola"
+                      type="password"
+                      required
+                    />
+                    <mat-error *ngIf="confirmPassword.hasError('required')">
+                      <mat-icon>clear</mat-icon>
+                      Please confirm your password!
+                    </mat-error>
+                    <mat-error
+                      *ngIf="confirmPassword.hasError('mismatchedPasswords')"
+                    >
+                      <mat-icon>clear</mat-icon>
+                      Your password doesn't match!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              fxLayout.lt-md="column"
+            >
+              <div fxLayout.lt-md="column" fxLayoutAlign.lt-md="center strech">
+                <button
+                  mat-raised-button
+                  type="submit"
+                  class="btn btn-danger pull-left"
+                  (click)="onSubmit()"
+                >
+                  Salveaza schimbarile
+                </button>
+              </div>
+              <div fxLayout.lt-md="column" fxLayoutAlign.lt-md="center strech">
+                <button
+                  mat-raised-button
+                  class="btn btn-danger pull-right"
+                  (click)="onReset()"
+                >
+                  Reseteaza modificarile
+                </button>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

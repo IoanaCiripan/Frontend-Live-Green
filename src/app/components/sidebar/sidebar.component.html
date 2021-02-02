@@ -1,0 +1,34 @@
+<div class="logo">
+  <div class="simple-text">
+    <div class="logo-img">
+      <img src="/assets/img/favicon.png" />
+    </div>
+    LIVE GREEN
+  </div>
+</div>
+<div class="sidebar-wrapper">
+  <ul class="nav" *ngIf="isUser()">
+    <li
+      routerLinkActive="active"
+      *ngFor="let menuItem of userMenuItems"
+      class="{{ menuItem.class }} nav-item"
+    >
+      <a class="nav-link" [routerLink]="[menuItem.path]">
+        <i class="material-icons">{{ menuItem.icon }}</i>
+        <p>{{ menuItem.title }}</p>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav" *ngIf="isAdmin()">
+    <li
+      routerLinkActive="active"
+      *ngFor="let menuItem of adminMenuItems"
+      class="{{ menuItem.class }} nav-item"
+    >
+      <a class="nav-link" [routerLink]="[menuItem.path]">
+        <i class="material-icons">{{ menuItem.icon }}</i>
+        <p>{{ menuItem.title }}</p>
+      </a>
+    </li>
+  </ul>
+</div>

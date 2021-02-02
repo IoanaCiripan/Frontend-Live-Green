@@ -1,0 +1,48 @@
+ <div class="container" >
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Glad to see you!</h5>
+            <form class="form-signin" [formGroup]="loginForm" (submit)="login()">
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Email</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input matInput formControlName="email" placeholder="Your Email" required>
+                    <mat-error *ngIf="email.hasError('required')">
+                        <mat-icon>clear</mat-icon>
+                        Email is required!
+                    </mat-error>
+                    <mat-error *ngIf="email.hasError('invalidEmail')">
+                        <mat-icon>clear</mat-icon>
+                        Please enter a valid email address!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input matInput formControlName="password" placeholder="Your Password"
+                        type="password" required>
+                    <mat-error *ngIf="password.hasError('required')">
+                        <mat-icon>clear</mat-icon>
+                        Password is required!
+                    </mat-error>
+                </mat-form-field>
+        
+                <button id="submitButton" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+            </form>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div>
+                <button class="member" (click)="navigateToRegister()">Create an account!</button>
+              </div>
+              <div>
+                  <button class="member" (click)="forgotPassword()">Forgot password?</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

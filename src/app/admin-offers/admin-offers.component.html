@@ -1,0 +1,176 @@
+<div class="main-content">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Actiuni</h4>
+      </div>
+      <div class="card-body">
+        <button mat-button (click)="onAddOffer()">
+            <mat-icon>add</mat-icon>Adauga oferta
+        </button>
+        <button mat-button (click)="onUpdate()">
+            <mat-icon>sync_alt</mat-icon>Salveaza schimbarile
+        </button>
+        <button mat-button (click)="onDelete()">
+            <mat-icon>clear</mat-icon>Sterge oferta
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div>
+      <mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8 table-responsive"
+        matSort
+      >
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nume
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Nume">
+            <mat-form-field
+              style="width: 100% !important"
+              class="table-form-field"
+            >
+              <textarea
+                matInput
+                name="name"
+                #name="ngModel"
+                #nameElement
+                [value]="row.name"
+                [(ngModel)]="row.name"
+                (change)="row.modified = true"
+              ></textarea>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Descriere
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Descriere">
+            <mat-form-field
+              style="width: 100% !important"
+              class="table-form-field"
+            >
+              <textarea
+                matInput
+                name="description"
+                #description="ngModel"
+                #descriptionElement
+                [value]="row.description"
+                [(ngModel)]="row.description"
+                (change)="row.modified = true"
+              ></textarea>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Oras
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Oras">
+            <mat-form-field
+              style="width: 100% !important"
+              class="table-form-field"
+            >
+              <textarea
+                matInput
+                name="city"
+                #city="ngModel"
+                #cityElement
+                [value]="row.city"
+                [(ngModel)]="row.city"
+                (change)="row.modified = true"
+              ></textarea>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="points">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Puncte
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Puncte">
+            <mat-form-field
+              style="width: 100% !important"
+              class="table-form-field"
+            >
+              <textarea
+                matInput
+                name="points"
+                #points="ngModel"
+                #pointsElement
+                [value]="row.points"
+                [(ngModel)]="row.points"
+                (change)="row.modified = true"
+              ></textarea>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="expirationDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Data expirarii
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="Data expirarii">
+            <mat-form-field
+              style="width: 100% !important"
+              class="table-form-field"
+            >
+              <input
+                matInput
+                [matDatepicker]="picker"
+                name="expirationDate"
+                [(ngModel)]="row.expirationDate"
+                (dateChange)="row.modified = true"
+                disabled
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [ngClass]="{
+            modified: row.modified
+          }"
+        ></mat-row>
+      </mat-table>
+      <mat-paginator
+        #paginator
+        class="mat-elevation-z8"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

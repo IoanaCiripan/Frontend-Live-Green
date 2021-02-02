@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: lucy;
+    src: url(assets/fonts/LucythecatRegular-R7mA.otf) format("opentype");
+}

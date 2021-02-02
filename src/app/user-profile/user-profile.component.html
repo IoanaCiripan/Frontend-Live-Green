@@ -1,0 +1,207 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Editeaza-ti profilul</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="updateUserForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="firstName"
+                      placeholder="Prenume"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="lastName"
+                      placeholder="Nume"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="email"
+                      placeholder="Adresa de email"
+                      type="email"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="zipCode"
+                      placeholder="Cod zip"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+            <mat-divider></mat-divider>
+            <form [formGroup]="passwordForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="oldPassword"
+                      placeholder="Vechea parola"
+                      type="password"
+                    />
+                    <mat-error *ngIf="oldPassword.hasError('required')">
+                      <mat-icon>clear</mat-icon>
+                      Old password is required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="newPassword"
+                      placeholder="Noua parola"
+                      type="password"
+                    />
+                    <mat-error *ngIf="newPassword.hasError('required')">
+                      <mat-icon>clear</mat-icon>
+                      New password is required!
+                    </mat-error>
+                    <mat-error *ngIf="newPassword.hasError('minlength')">
+                      <mat-icon>clear</mat-icon>
+                      New password must have at least 6 characters!
+                    </mat-error>
+                    <mat-error *ngIf="newPassword.hasError('hasNumber')">
+                      <mat-icon>clear</mat-icon>
+                      New password needs to have at least one number!
+                    </mat-error>
+                    <mat-error *ngIf="newPassword.hasError('hasCapitalCase')">
+                      <mat-icon>clear</mat-icon>
+                      New password needs to have at least one uppercase letter!
+                    </mat-error>
+                    <mat-error *ngIf="newPassword.hasError('hasSmallCase')">
+                      <mat-icon>clear</mat-icon>
+                      New password needs to have at least one lowercase letter!
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      formControlName="confirmNewPassword"
+                      placeholder="Confirma parola"
+                      type="password"
+                    />
+                    <mat-error *ngIf="confirmNewPassword.hasError('required')">
+                      <mat-icon>clear</mat-icon>
+                      Please confirm your password!
+                    </mat-error>
+                    <mat-error
+                      *ngIf="confirmNewPassword.hasError('mismatchedPasswords')"
+                    >
+                      <mat-icon>clear</mat-icon>
+                      Your password doesn't match!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              fxLayout.lt-md="column"
+            >
+              <div fxLayout.lt-md="column" fxLayoutAlign.lt-md="center strech">
+                <button
+                  mat-raised-button
+                  type="submit"
+                  class="btn btn-danger pull-left"
+                  (click)="updateData()"
+                >
+                  Salveaza schimbarile
+                </button>
+                <button
+                  mat-raised-button
+                  type="submit"
+                  class="btn btn-danger pull-left"
+                  (click)="updatePassword()"
+                >
+                  Schimba parola
+                </button>
+              </div>
+              <div fxLayout.lt-md="column" fxLayoutAlign.lt-md="center strech">
+                <button
+                  mat-raised-button
+                  class="btn btn-danger pull-right"
+                  (click)="deleteAccount()"
+                >
+                  Sterge contul
+                </button>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+            <a href="javascript:void(0)">
+              <img
+                class="img"
+                src="../../assets/img/faces/user-management.png"
+              />
+            </a>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">
+              {{ managedUser?.firstName }} {{ managedUser?.lastName }}
+            </h4>
+            <div
+              *ngIf="isUser()"
+              fxLayoutAlign="center center"
+              fxLayoutAlign.lt-md="center center"
+              class="card-footer"
+            >
+              <button class="btn btn-danger btn-round" type="button" [routerLink]="['/earn-points']">
+                Scaneaza produse
+              </button>
+              <button class="btn btn-danger btn-round" type="button" [routerLink]="['/get-rewards']">
+                Verifica punctele
+              </button>
+            </div>
+            <div
+              *ngIf="!isUser()"
+              fxLayoutAlign="center center"
+              fxLayoutAlign.lt-md="center center"
+              class="card-footer"
+            >
+              <button class="btn btn-danger btn-round" type="button" [routerLink]="['/admin-products']">
+                Adauga produse
+              </button>
+              <button class="btn btn-danger btn-round" type="button" [routerLink]="['/admin-offers']">
+                Adauga oferte
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
